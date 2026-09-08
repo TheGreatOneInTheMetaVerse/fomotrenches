@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Read-only multi-chain trader watchlist" />
+    <title>chaintrenches — multi-chain trader tape</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span>chaintrenches</span><span id="clock">--:--:--</span></div>
+      <div class="status" id="status" role="status">loading local watchlist…</div>
+      <div class="top-actions" aria-label="Network filters">
+        <button class="network-chip active" data-network="all">ALL</button>
+        <button class="network-chip" data-network="evm">EVM</button>
+        <button class="network-chip" data-network="solana">SOLANA</button>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">READ-ONLY · WATCHLIST WORKBENCH</p>
+          <h1 id="page-title">Traders to map across chains</h1>
+          <p class="muted">Seeded from the public rhtrenches trader table. Solana addresses stay empty until verified.</p>
+        </div>
+        <div class="legend" aria-label="Network color legend">
+          <span class="legend-item"><i class="dot dot-robinhood"></i>Robinhood</span>
+          <span class="legend-item"><i class="dot dot-solana"></i>Solana</span>
+          <span class="legend-item"><i class="dot dot-base"></i>Base</span>
+          <span class="legend-item"><i class="dot dot-bnb"></i>BNB</span>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Watchlist summary">
+        <div class="metric"><span>TRACKED</span><strong id="metric-tracked">—</strong></div>
+        <div class="metric"><span>EVM READY</span><strong id="metric-evm">—</strong></div>
+        <div class="metric"><span>SOLANA MISSING</span><strong id="metric-solana">—</strong></div>
+        <div class="metric"><span>LAST SNAPSHOT</span><strong id="metric-snapshot">—</strong></div>
+      </section>
+
+      <section class="toolbar" aria-label="Watchlist controls">
+        <label class="search-field">
+          <span class="sr-only">Search trader</span>
+          <input id="search" type="search" placeholder="filter handle / display name / wallet" autocomplete="off" />
+        </label>
+        <label class="select-field">
+          <span class="sr-only">Sort traders</span>
+          <select id="sort">
+            <option value="followers">sort: followers</option>
+            <option value="net_pnl">sort: total P/L</option>
+            <option value="volume">sort: volume</option>
+            <option value="fills">sort: fills</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="table-panel" aria-labelledby="trader-heading">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">01 · TRADER INDEX</span>
+            <h2 id="trader-heading">Watchlist</h2>
+          </div>
+          <span class="count" id="result-count">—</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>trader</th>
+                <th>network</th>
+                <th class="numeric">followers</th>
+                <th class="numeric">fills</th>
+                <th class="numeric">volume</th>
+                <th class="numeric">total p/l</th>
+                <th>profile</th>
+                <th>evm wallet</th>
+                <th>solana wallet</th>
+              </tr>
+            </thead>
+            <tbody id="trader-rows">
+              <tr><td colspan="9" class="empty">loading watchlist…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="next-panel">
+        <div>
+          <span class="eyebrow">NEXT ADAPTER</span>
+          <h2>Solana mapping queue</h2>
+          <p class="muted">Add a verified Solana public key per trader, then the Solana adapter can begin filling the same event model.</p>
+        </div>
+        <span class="pending-badge" id="pending-badge">pending</span>
+      </section>
+    </main>
+
+    <footer class="footer">public-source seed · read-only · no wallet connection · no trading</footer>
+    <script src="app.js"></script>
+  </body>
+</html>
